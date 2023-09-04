@@ -51,7 +51,7 @@ class DataProvider: public IProviderCallbacks {
           _sampleConfig(sampleConfigSelector.at(dataType)),
           _pWifiLibaray(pWifiLibrary){};
     ~DataProvider(){};
-    void begin();
+    void begin(unsigned int Bluetooth_loop_time);
     void writeValueToCurrentSample(float value, SignalType signalType);
     void commitSample();
     void handleDownload();
@@ -79,7 +79,7 @@ class DataProvider: public IProviderCallbacks {
     bool _enableBatteryService;
 
     SampleConfig _sampleConfig;
-    uint64_t _historyIntervalMilliSeconds = 600000; // = 10 minutes
+    uint64_t _historyIntervalMilliSeconds = 10000; // = 10 minutes
     uint64_t _latestHistoryTimeStamp = 0;
     uint64_t _latestHistoryTimeStampAtDownloadStart = 0;
     IWifiLibraryWrapper* _pWifiLibaray;

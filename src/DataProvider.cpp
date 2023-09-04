@@ -1,7 +1,10 @@
 #include "DataProvider.h"
 #include <math.h>
 
-void DataProvider::begin() {
+void DataProvider::begin(unsigned int Bluetooth_loop_time) {
+
+    _historyIntervalMilliSeconds = (Bluetooth_loop_time * 1000);
+
     _setupBLEInfrastructure();
 
     _sampleHistory.setSampleSize(_sampleConfig.sampleSizeBytes);
