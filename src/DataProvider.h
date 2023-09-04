@@ -53,7 +53,7 @@ class DataProvider: public IProviderCallbacks {
     ~DataProvider(){};
     void begin(unsigned int Bluetooth_loop_time);
     void writeValueToCurrentSample(float value, SignalType signalType);
-    void commitSample();
+    void commitSample(unsigned int Bluetooth_loop_time);
     void handleDownload();
     void setBatteryLevel(int value);
     void setSampleConfig(DataType dataType);
