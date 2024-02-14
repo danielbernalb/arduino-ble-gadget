@@ -1,7 +1,8 @@
 #include "DataProvider.h"
 #include <math.h>
 
-void DataProvider::begin() {
+void DataProvider::begin(unsigned int Bluetooth_loop_time) {
+    _historyIntervalMilliSeconds = (Bluetooth_loop_time * 1000);
     _setupBLEInfrastructure();
 
     _sampleHistory.setSampleSize(_sampleConfig.sampleSizeBytes);
@@ -42,8 +43,9 @@ void DataProvider::writeValueToCurrentSample(float value,
     _currentSample.writeValue(convertedValue, offset);
 }
 
-void DataProvider::commitSample() {
+void DataProvider::commitSample(unsigned int Bluetooth_loop_time) {
     uint64_t currentTimeStamp = millis();
+    _historyIntervalMilliSeconds = (Bluetooth_loop_time * 1000);
     if ((currentTimeStamp - _latestHistoryTimeStamp) >=
         _historyIntervalMilliSeconds) {
         _sampleHistory.putSample(_currentSample);
